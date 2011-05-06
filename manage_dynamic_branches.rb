@@ -30,13 +30,13 @@ end
 def create_hudson_job_from_branch(project_name, simple_branch)
 	job_name = "#{project_name}_#{simple_branch}"
 	puts "will create #{job_name} from #{project_name}_develop, using branch: #{simple_branch}"
-	`./add_hudson_job.sh #{project_name} #{simple_branch}`
+	exec_or_fail "./add_hudson_job.sh #{project_name} #{simple_branch}"
 end
 
 def remove_hudson_job(project_name, simple_name)
 	job_name = "#{project_name}_#{simple_name}"
 	puts "will remove hudson job #{job_name} based on #{simple_name}"
-	`./remove_hudson_job.sh #{project_name} #{simple_name}`
+	exec_or_fail "./remove_hudson_job.sh #{project_name} #{simple_name}"
 end
 
 def manage_dynamic_branches_for_project(project_name, git_repo_url)
@@ -61,7 +61,9 @@ def manage_all_projects
   end
 end
 
-abort "usage: #{__FILE__} project_name git_repo_url" if ARGV.size != 2
-project_name, git_repo_url = ARGV[0], ARGV[1]
-puts git_repo_url
-manage_dynamic_branches_for_project(project_name, git_repo_url)
+if __FILE__ == $0
+  abort "usage: #{__FILE__} project_name git_repo_url" if ARGV.size != 2
+  project_name, git_repo_url = ARGV[0], ARGV[1]
+  puts git_repo_url
+  manage_dynamic_branches_for_project(project_name, git_repo_url)
+end
