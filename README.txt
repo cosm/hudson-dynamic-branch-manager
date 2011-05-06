@@ -29,3 +29,6 @@ Setting up a hudson job
 
 While you could set the project scm to be the github url for this tool, that is less safe.  Why trust that this tool's account will never be compromised?
 
+Credits
+=======
+Thanks to http://pachube.com/ for allowing me to open-source this.
