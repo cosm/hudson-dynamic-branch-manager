@@ -48,7 +48,8 @@ While you could set the project scm to be the github url for this tool, that is 
 
 TODO
 ====
-Consider allowing a grace period so that projects for deleted branches are not immediately deleted (especially if they didn't pass in their last run).
+ * Needs tightening up to ensure all failures are caught and an error code returned (especially in the git - grep pipeline).
+ * Consider allowing a grace period so that projects for deleted branches are not immediately deleted (especially if they didn't pass in their last run).
 
 Alternative approaches - discussion
 ===================================
