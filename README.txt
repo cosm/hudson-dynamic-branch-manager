@@ -8,8 +8,8 @@ For example, the following command:
 
     ./manage_dynamic_branches.rb world-domination git@github.com:drevil/secretplan.git
 
-would first scan the "secretplan" git repo for branches prefixed rc- or hotfix- which were not already on your hudson server, and would add a corresponding hudson project ("job") for each. E.g. the branch rc-0.4 would have created for it the job "world-domination-rc-0.4".  We assume world-domination-develop job already exists (see elsewhere).
-It will then delete any hudson jobs for that project name which do not have corresponding git branches.  So if it sees the hudson project world-domination-rc-0.3 but you've recently deleted the branch rc-0.3 from git, it will delete that branch (without any warning).
+would first scan the "secretplan" git repo for branches prefixed rc- or hotfix- which were not already on your hudson server, and would add a corresponding hudson project ("job") for each. E.g. the branch rc-0.4 would have created for it the job "world-domination_rc-0.4".  We assume world-domination_develop job already exists (see elsewhere).
+It will then delete any hudson jobs for that project name which do not have corresponding git branches.  So if it sees the hudson project world-domination_rc-0.3 but you've recently deleted the branch rc-0.3 from git, it will delete that branch (without any warning).
 
 Usage:
 ======
@@ -18,7 +18,7 @@ It is envisaged the user will set up scheduling (ideally by hudson) so that the 
 On the hudson server, run: 
     ./manage_dynamic_branches.rb job-base-name git-url
 
-For hudson job addition to be successful, there must already exist a job for the "develop" branch of your project (so in the above example, a job called job-base-name-develop).  This job config will be cloned, only occurrences of the branch name "develop" will be subsitituted with origin/{branch_name}.
+For hudson job addition to be successful, there must already exist a job for the "develop" branch of your project (so in the above example, a job called job-base-name_develop).  This job config will be cloned, only occurrences of the branch name "develop" will be subsitituted with origin/{branch_name}.
 
 It is assumed that the local machine is the hudson server (http calls are made to localhost, and the local filesystem is inspected for the existence of jobs).
 

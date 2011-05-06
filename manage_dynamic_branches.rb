@@ -53,8 +53,8 @@ end
 #in the script here and invoke only once
 def manage_all_projects
   projects= [ 
-    ["pachweb", "git@github.com/foo/bar.git"],
-    ["axino", "git@github.com/baz/qux.git"],
+    ["barjob", "git@github.com/foo/bar.git"],
+    ["quxjob", "git@github.com/baz/qux.git"],
   ]
   projects.each do |project_name, git_repo|
     manage_dynamic_branches_for_project(project_name, git_repo)
