@@ -55,6 +55,10 @@ Alternative approaches - discussion
 ===================================
 Where callbacks are available from your SCM repo to signal, say, the creation and deletion of branches, they could be used to simplify some of the work here.  However, if the "branch-created" callback fails as we assume it sometimes will (e.g. due to a temporarily unavailable network), the SCM and CI will now be out of sync.  A callback on each commit could ensure the existence of the relevant branch, but the problem remains for branch deletion events, and anyway the per-commit event solution would threaten to bring a race condition to the CI project management when multiple commits come quickly on the same branch.  I prefer having the CI poll.
 
+If you still want to do a git hook, you might look at Stephen Haberman's post-receive-hudson:
+https://github.com/stephenh/git-central/blob/master/server/post-receive-hudson
+
+
 Credits
 =======
 Thanks to http://pachube.com/ for allowing me to open-source this.
