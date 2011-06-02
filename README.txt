@@ -1,6 +1,11 @@
+Dynamic Branch Manger for Hudson and Jenkins
+============================================
+
 Description
 ===========
-This tool auto-detects the addition and removal of git release-candidate ("rc") or "hotfix" branches and adds or removes hudson projects ("jobs") accordingly.
+This tool auto-detects the addition and removal of git release-candidate ("rc") or "hotfix" branches and adds or removes hudson/jenkins projects ("jobs") accordingly.  
+
+(Throughout this readme, when we mention hudson we mean hudson/jenkins.)
 
 It is meant for projects which use Vincent Driessen's git branching model or similar (see http://nvie.com/posts/a-successful-git-branching-model/ ).
 
@@ -15,12 +20,14 @@ Usage:
 ======
 It is envisaged the user will set up scheduling (ideally by hudson) so that the following command is run periodically, thus keeping hudson jobs in sync with git branches.
 
-On the hudson server, run: 
-    ./manage_dynamic_branches.rb job-base-name git-url
+On the CI server, run: 
+    CI_TYPE=hudson  ./manage_dynamic_branches.rb job-base-name git-url
+or 
+    CI_TYPE=jenkins ./manage_dynamic_branches.rb job-base-name git-url
 
-For hudson job addition to be successful, there must already exist a job for the "develop" branch of your project (so in the above example, a job called job-base-name_develop).  This job config will be cloned, only occurrences of the branch name "develop" will be subsitituted with origin/{branch_name}.
+For job addition to be successful, there must already exist a job for the "develop" branch of your project (so in the above example, a job called job-base-name_develop).  This job config will be cloned, only occurrences of the branch name "develop" will be subsitituted with origin/{branch_name}.
 
-It is assumed that the local machine is the hudson server (http calls are made to localhost, and the local filesystem is inspected for the existence of jobs).
+It is assumed that the local machine is the CI server (http calls are made to localhost, and the local filesystem is inspected for the existence of jobs).
 
 WARNING: command-line inputs are taken as given and used to formulate further commands, without screening.  Don't use untrusted sources for these inputs.
 
@@ -42,6 +49,8 @@ Setting up a hudson job
  * schedule it as frequent as you like
  * Add a build step "execute shell", having the following command:
  * * cd /opt/hudson_branch_mgr/ && ruby manage_dynamic_branches.rb your_project_name your_git_repo_url
+ * * OR (on jenkins)
+ * * cd /opt/hudson_branch_mgr/ && CI_TYPE=jenkins ruby manage_dynamic_branches.rb your_project_name your_git_repo_url
  * repeat previous step for each project whose branches you want tracked
 
 While you could set the project scm to be the github url for this tool, that is less safe.  Why trust that this tool's account will never be compromised?
