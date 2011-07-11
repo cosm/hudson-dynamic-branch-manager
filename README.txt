@@ -1,5 +1,5 @@
-Dynamic Branch Manger for Hudson and Jenkins
-============================================
+Dynamic Branch Manager for Hudson and Jenkins
+=============================================
 
 Description
 ===========
