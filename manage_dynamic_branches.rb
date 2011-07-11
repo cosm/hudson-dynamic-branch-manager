@@ -3,13 +3,14 @@
 class BranchJobManager
   attr_reader :ci_type
   def initialize(ci_type)
+    ci_type = ci_type.to_sym
     allowed_types = [:jenkins, :hudson]
     raise "unrecognised server type '#{ci_type}'.  Choose from #{allowed_types}" unless allowed_types.member? ci_type
     @ci_type=ci_type
   end
 
   def correct_user
-    @ci_type.to_str
+    @ci_type.to_s
   end
 
   def exec_or_fail(cmd)
@@ -77,6 +78,6 @@ end
 if __FILE__ == $0
   abort "usage: #{__FILE__} project_name git_repo_url" if ARGV.size != 2
   project_name, git_repo_url = ARGV[0], ARGV[1]
-  mgr = BranchJobManager.new(ENV[CI_TYPE] || :hudson)
+  mgr = BranchJobManager.new(ENV['CI_TYPE'] || :hudson)
   mgr.manage_dynamic_branches_for_project(project_name, git_repo_url)
 end
